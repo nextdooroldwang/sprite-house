@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AvatarSelector from './AvatarSelector';
 
 interface LoginScreenProps {
   onLogin: (username: string, avatar: string, roomId: string) => void;
+  initialUsername?: string;
+  initialRoomId?: string;
 }
 
-const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
-  const [username, setUsername] = useState('');
+const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, initialUsername, initialRoomId }) => {
+  const [username, setUsername] = useState(initialUsername || '');
   const [avatar, setAvatar] = useState('avatar_1');
-  const [roomId, setRoomId] = useState('');
+  const [roomId, setRoomId] = useState(initialRoomId || '');
+
+  useEffect(() => {
+    if (initialUsername) setUsername(initialUsername);
+  }, [initialUsername]);
+
+  useEffect(() => {
+    if (initialRoomId) setRoomId(initialRoomId.toUpperCase());
+  }, [initialRoomId]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
