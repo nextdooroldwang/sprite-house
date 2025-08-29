@@ -16,5 +16,8 @@
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^7.6.0"
+  },
+  "engines": {
+    "node": ">=22.3.0 <22.4.0"
   }
 }
